@@ -3,10 +3,22 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <OniManagedDir Condition="'$(OniManagedDir)' == ''">$(HOME)/.local/share/Steam/steamapps/common/OxygenNotIncluded/OxygenNotIncluded_Data/Managed</OniManagedDir>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="PLib" Version="4.25.0" PrivateAssets="all" />
+    <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.40"
+                      PrivateAssets="all" ExcludeAssets="all" GeneratePathProperty="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>$(OniManagedDir)/Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+
     <Reference Include="Assembly-CSharp">
       <HintPath>$(OniManagedDir)/Assembly-CSharp.dll</HintPath>
       <Private>false</Private>
@@ -22,5 +34,23 @@
       <Private>false</Private>
     </Reference>
   </ItemGroup>
+
+  <UsingTask TaskName="ILRepack"
+             AssemblyFile="$(PkgILRepack_Lib_MSBuild_Task)/build/ILRepack.Lib.MSBuild.Task.dll" />
+
+  <Target Name="MergePLib" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <ItemGroup>
+      <AssembliesToMerge Include="$(TargetPath)" />
+      <AssembliesToMerge Include="$(TargetDir)PLib.dll" />
+      <ILRepackLibraryPath Include="$(OniManagedDir)" />
+    </ItemGroup>
+    <ILRepack InputAssemblies="@(AssembliesToMerge)"
+              LibraryPath="@(ILRepackLibraryPath)"
+              OutputFile="$(TargetPath)"
+              TargetKind="SameAsPrimaryAssembly"
+              DebugInfo="true"
+              Parallel="true" />
+    <Delete Files="$(TargetDir)PLib.dll" />
+  </Target>
 
 </Project>

@@ -1,6 +1,7 @@
 using HarmonyLib;
 using KMod;
-using UnityEngine;
+using PeterHan.PLib.Buildings;
+using PeterHan.PLib.Core;
 
 namespace BatterySwitcher
 {
@@ -9,7 +10,8 @@ namespace BatterySwitcher
         public override void OnLoad(Harmony harmony)
         {
             base.OnLoad(harmony);
-            Debug.Log("[BatterySwitcher] Mod loaded");
+            PUtil.InitLibrary(false);
+            new PBuildingManager().Register(BatterySwitcherConfig.CreateBuilding());
         }
     }
 }

@@ -9,23 +9,23 @@ Run `dotnet build` after every code change.
 - [x] Baseline build succeeds against the installed ONI assemblies.
 - [ ] Investigate the current `System.IO.Compression` and `System.Net.Http`
       assembly-version warnings; suppress them only if confirmed harmless.
-- [ ] Check `mod.yaml` and `mod_info.yaml` into the repository. They currently
+- [x] Check `mod.yaml` and `mod_info.yaml` into the repository. They currently
       exist only in the local mod directory.
-- [ ] Choose and freeze the building ID before creating any test save.
+- [x] Choose and freeze the building ID before creating any test save.
 
 ## Phase 1 — inert building
 
-- [ ] Confirm the current PLib Core/Buildings package IDs and compatible pinned
+- [x] Confirm the current PLib Core/Buildings package IDs and compatible pinned
       versions.
-- [ ] Configure PLib and ILRepack so PLib is merged into
+- [x] Configure PLib and ILRepack so PLib is merged into
       `BatterySwitcher.dll`.
-- [ ] Ensure the build output does not include Harmony, ONI, Unity, or .NET
+- [x] Ensure the build output does not include Harmony, ONI, Unity, or .NET
       runtime assemblies.
-- [ ] Add `BatterySwitcherConfig.cs` with a temporary base-game animation,
+- [x] Add `BatterySwitcherConfig.cs` with a temporary base-game animation,
       fixed footprint, construction recipe, and no functional power ports.
-- [ ] Register the building in the Power build menu through PLib.
-- [ ] Add the minimum name, description, and effect strings.
-- [ ] Build and deploy the phase-1 package to the local mod directory.
+- [x] Register the building in the Power build menu through PLib.
+- [x] Add the minimum name, description, and effect strings.
+- [x] Build and deploy the phase-1 package to the local mod directory.
 
 ### Gate
 
