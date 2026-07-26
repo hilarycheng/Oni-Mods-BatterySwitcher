@@ -54,6 +54,7 @@ Do not add service layers, factories, generic frameworks, options screens, UI fr
 ## Development stages
 
 Do not combine unverified stages.
+Use `TASKS.md` as the execution checklist and complete each manual gate before starting the next stage.
 
 1. Register an inert, placeable building using a base-game animation.
 2. Verify construct, select, deconstruct, save, and load.
@@ -178,7 +179,7 @@ Never ship development assemblies, `bin/`, `obj/`, decompiler files, or framewor
 
 ## Codex rules
 
-- Keep replies short and precise.
+- Keep every reply short and precise, including progress updates and final responses.
 - Explain a material ONI API assumption before implementing it.
 - Do not redesign the project without a confirmed technical reason.
 - Do not add features beyond this file.
