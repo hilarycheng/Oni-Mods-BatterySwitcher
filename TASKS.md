@@ -29,19 +29,19 @@ Run `dotnet build` after every code change.
 
 ### Gate
 
-- [ ] The game loads with no BatterySwitcher exception in `Player.log`.
-- [ ] The building appears in the Power menu and can be placed.
+- [x] The game loads with no BatterySwitcher exception in `Player.log`.
+- [x] The building appears in the Power menu and can be placed.
 
 ## Phase 2 — basic building lifecycle
 
-- [ ] Construct and select the building.
-- [ ] Save and reload with the building present.
-- [ ] Deconstruct it and verify normal material recovery.
-- [ ] Confirm repeated load/deconstruct tests add no exceptions to `Player.log`.
+- [x] Construct and select the building.
+- [x] Save and reload with the building present.
+- [x] Deconstruct it and verify normal material recovery.
+- [x] Confirm repeated load/deconstruct tests add no exceptions to `Player.log`.
 
 ### Gate
 
-- [ ] Construct, select, save, load, and deconstruct all pass in game.
+- [x] Construct, select, save, load, and deconstruct all pass in game.
 
 ## Phase 3 — isolated power connections
 
