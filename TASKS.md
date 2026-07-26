@@ -86,8 +86,10 @@ rules, not an artificial building wattage cap. U59's `PowerTransformer` is the
 transfer reference: an input `Battery` records actual circuit energy, while
 `Generator.ApplyDeltaJoules` reports actual output consumption. Battery
 Switcher's capacity remains the serialized numeric buffer; the native input
-battery is only a zero-leak 1 kJ circuit-transfer accumulator. The verified
-input port offset is `(0, 0)`; the output remains `(1, 0)`.
+battery is only a zero-leak 1 kJ circuit-transfer accumulator. It is registered
+as transformer input so ONI includes charging in current wire load; the
+zero-draw input consumer preserves the 1 kW potential load. The verified input
+port offset is `(0, 0)`; the output remains `(1, 0)`.
 
 ### Gate
 
@@ -136,6 +138,8 @@ Then implement:
       demand are safe.
 - [x] A 10 W lamp and a 240 W gas pump receive power simultaneously while a
       supplier is above its discharge threshold.
+- [x] The input wire reports 1 kW current load while charging and 1 kW
+      potential load.
 - [x] Save/load succeeds with A charging, B charging, and at each boundary.
 - [x] Pause/resume, all speeds, rapid speed changes, and delayed updates never
       leave output permanently disabled.

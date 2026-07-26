@@ -4,7 +4,7 @@ using UnityEngine;
 namespace BatterySwitcher
 {
     [SerializationConfig(MemberSerialization.OptIn)]
-    public sealed class BatterySwitcherController : Generator
+    public sealed class BatterySwitcherController : PowerTransformer
     {
         [Serialize]
         private float batteryAEnergy;
@@ -98,7 +98,10 @@ namespace BatterySwitcher
                 }
                 SwitchAtBoundary();
             }
-            base.ApplyDeltaJoules(joules, doDisease);
+            AssignJoulesAvailable(Mathf.Clamp(
+                JoulesAvailable + joules,
+                0f,
+                doDisease ? float.MaxValue : Capacity));
         }
 
         private float ChargingEnergy
