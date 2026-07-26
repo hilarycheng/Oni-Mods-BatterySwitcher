@@ -10,8 +10,9 @@ namespace BatterySwitcher
     {
         public const string Id = "BatterySwitcher";
         internal const float BufferCapacity = 20000f;
+        internal const float ChargeStopEnergy = BufferCapacity * 0.8f;
+        internal const float DischargeStopEnergy = BufferCapacity * 0.3f;
         internal const float InputWattage = 1000f;
-        internal const float OutputWattage = 1000f;
 
         internal static PBuilding Building { get; private set; }
 
@@ -25,12 +26,12 @@ namespace BatterySwitcher
                 ConstructionTime = 60f,
                 Decor = TUNING.BUILDINGS.DECOR.PENALTY.TIER2,
                 Description = "A switching device with two isolated internal battery sections.",
-                EffectText = "Phase 4 prototype. Transfers power through one internal 20 kJ energy buffer.",
+                EffectText = "Transfers power through two alternating internal 20 kJ energy buffers.",
                 Height = 2,
                 HP = 30,
                 Placement = BuildLocationRule.OnFloor,
                 PowerInput = new PowerRequirement(InputWattage, new CellOffset(0, 0)),
-                PowerOutput = new PowerRequirement(OutputWattage, new CellOffset(1, 0)),
+                PowerOutput = new PowerRequirement(0f, new CellOffset(1, 0)),
                 SubCategory = "batteries",
                 Tech = "Acoustics",
                 ViewMode = OverlayModes.Power.ID,
@@ -54,6 +55,7 @@ namespace BatterySwitcher
                 Building.PowerOutput = null;
                 def = Building.CreateDef();
             }
+            def.GeneratorBaseCapacity = 2f * BufferCapacity;
             def.AddSearchTerms(SEARCH_TERMS.POWER);
             def.AddSearchTerms(SEARCH_TERMS.BATTERY);
             return def;

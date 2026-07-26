@@ -80,12 +80,14 @@ The consumer and generator use distinct building offsets and own their
 - [x] Verify a delayed large simulation update produces the same energy result
       as equivalent smaller updates.
 
-Initial phase-4 values are 20 kJ per buffer and 1 kW on each port. U59's
-`PowerTransformer` is the transfer reference: an input `Battery` records actual
-circuit energy, while `Generator.ApplyDeltaJoules` reports actual output
-consumption. Battery Switcher's capacity remains the serialized numeric buffer;
-the native input battery is only a zero-leak 1 kJ circuit-transfer accumulator.
-The verified input port offset is `(0, 0)`; the output remains `(1, 0)`.
+Initial phase-4 values are 20 kJ per buffer and 1 kW input. Output is
+demand-driven and limited by available buffer energy and normal circuit/wire
+rules, not an artificial building wattage cap. U59's `PowerTransformer` is the
+transfer reference: an input `Battery` records actual circuit energy, while
+`Generator.ApplyDeltaJoules` reports actual output consumption. Battery
+Switcher's capacity remains the serialized numeric buffer; the native input
+battery is only a zero-leak 1 kJ circuit-transfer accumulator. The verified
+input port offset is `(0, 0)`; the output remains `(1, 0)`.
 
 ### Gate
 
@@ -96,32 +98,48 @@ The verified input port offset is `(0, 0)`; the output remains `(1, 0)`.
 
 Before coding, define the unresolved switching policy:
 
-- [ ] Decide whether a switch is triggered by supplier-empty,
-      charger-full, or both.
-- [ ] Define deterministic behavior for both-empty, both-full, simultaneous
+- [x] Switch only when the charger reaches its upper threshold and the
+      supplier reaches its lower threshold.
+- [x] Define deterministic behavior for both-empty, simultaneous
       boundaries, and insufficient input.
-- [ ] Define how remaining transferable energy is processed after a mid-update
+- [x] When both buffers are full, stop input consumption; output and the
+      current roles otherwise remain unchanged.
+- [x] Define how remaining transferable energy is processed after a mid-update
       switch.
+
+Charging stops at 80% and discharging stops at 30%. The roles exchange only
+when both thresholds have been reached, so both-empty startup charges one
+buffer without supplying output. Remaining input energy and actual output
+demand continue after a mid-update exchange where possible.
+The output generator offers all currently usable buffer energy. Its public
+`GeneratorBaseCapacity` is only a transfer ledger sized for both buffers, so
+sequential consumers share the offer while ONI applies normal wire-load rules.
 
 Then implement:
 
-- [ ] Add the second serialized energy field and serialized charging-role
+- [x] Add the second serialized energy field and serialized charging-role
       field using permanent names.
-- [ ] Repair invalid loaded values and role state deterministically.
-- [ ] Enforce exactly one charger and one supplier; neither buffer may hold
+- [x] Repair invalid loaded values and role state deterministically.
+- [x] Enforce exactly one charger and one supplier; neither buffer may hold
       both roles.
-- [ ] Process boundary crossings without exact-float equality or zero-progress
+- [x] Process boundary crossings without exact-float equality or zero-progress
       switch loops.
-- [ ] Preserve energy and bounds across every switch.
+- [x] Preserve energy and bounds across every switch.
+- [x] Show each buffer's charge and threshold-aware role on separate lines,
+      plus combined stored energy, when the building is selected.
 
 ### Gate
 
-- [ ] Both empty, one full, both full, insufficient input, and excess output
+- [x] Selected status text tracks both role exchanges and stored-energy
+      changes.
+- [x] Both empty, one full, both full, insufficient input, and excess output
       demand are safe.
-- [ ] Save/load succeeds with A charging, B charging, and at each boundary.
-- [ ] Pause/resume, all speeds, rapid speed changes, and delayed updates never
+- [x] A 10 W lamp and a 240 W gas pump receive power simultaneously while a
+      supplier is above its discharge threshold.
+- [x] Save/load succeeds with A charging, B charging, and at each boundary.
+- [x] Pause/resume, all speeds, rapid speed changes, and delayed updates never
       leave output permanently disabled.
-- [ ] No repeated BatterySwitcher exceptions appear in `Player.log`.
+- [x] No repeated BatterySwitcher exceptions appear in `Player.log`.
 
 ## Phase 6 — heat and final balance
 
