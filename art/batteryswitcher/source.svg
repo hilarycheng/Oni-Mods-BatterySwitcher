@@ -1,0 +1,234 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="960" height="880" viewBox="0 0 960 880">
+  <defs>
+    <linearGradient id="steel" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#7b7b6b"/>
+      <stop offset="0.45" stop-color="#57594f"/>
+      <stop offset="1" stop-color="#343831"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#51564e"/>
+      <stop offset="1" stop-color="#252a27"/>
+    </linearGradient>
+    <linearGradient id="copper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d47b48"/>
+      <stop offset="1" stop-color="#713a2c"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#89f3e9"/>
+      <stop offset="1" stop-color="#159d9d"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd65a"/>
+      <stop offset="1" stop-color="#d07813"/>
+    </linearGradient>
+
+    <g id="bolt">
+      <circle cx="0" cy="0" r="4.2" fill="#222724" stroke="#121615" stroke-width="2"/>
+      <path d="M-2.5 0h5" stroke="#858778" stroke-width="1.4"/>
+    </g>
+
+    <g id="insulator">
+      <path d="M-15 20h30l-3-7 4-6-4-7 3-7h-30l3 7-4 7 4 6z"
+            fill="#c7c0a8" stroke="#1b211f" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M-11 14h22M-12 2h24M-10-7h20"
+            fill="none" stroke="#77786c" stroke-width="3"/>
+      <rect x="-10" y="-15" width="20" height="8" rx="2"
+            fill="url(#copper)" stroke="#1b211f" stroke-width="4"/>
+    </g>
+
+    <g id="body-art">
+      <path d="M19 52L27 40h84l9 10h80l9-10h84l8 12v121l-10 10h-83l-9-8h-78l-9 8H29l-10-10z"
+            fill="url(#steel)" stroke="#171c1a" stroke-width="7" stroke-linejoin="round"/>
+      <path d="M25 166h270v27H25z" fill="url(#edge)" stroke="#171c1a" stroke-width="6"/>
+      <path d="M33 55h75l8 8v92l-8 8H33l-8-8V63z"
+            fill="#343a35" stroke="#181d1b" stroke-width="6"/>
+      <path d="M212 55h75l8 8v92l-8 8h-75l-8-8V63z"
+            fill="#343a35" stroke="#181d1b" stroke-width="6"/>
+      <path d="M123 43h74l8 10v115l-9 8h-73l-8-8V53z"
+            fill="#626359" stroke="#181d1b" stroke-width="7"/>
+      <path d="M132 51h56" stroke="#939181" stroke-width="4" opacity=".55"/>
+      <path d="M31 48h78M211 48h78" stroke="#9a9887" stroke-width="4" opacity=".5"/>
+      <path d="M31 68h78v78H31zM211 68h78v78h-78z"
+            fill="#111817" stroke="#202724" stroke-width="5"/>
+      <path d="M34 153h72M214 153h72" stroke="#858678" stroke-width="3"/>
+
+      <path d="M61 40v-25h49V5h20" fill="none" stroke="#1b211f" stroke-width="11"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M61 40v-25h49V5h20" fill="none" stroke="#a15c32" stroke-width="5"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M259 40v-25h-49V5h-20" fill="none" stroke="#1b211f" stroke-width="11"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M259 40v-25h-49V5h-20" fill="none" stroke="#a15c32" stroke-width="5"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <g transform="translate(61 17)"><use xlink:href="#insulator"/></g>
+      <g transform="translate(259 17)"><use xlink:href="#insulator"/></g>
+
+      <path d="M43 191v-12h34v12" fill="#272e2a" stroke="#171c1a" stroke-width="5"/>
+      <path d="M143 191v-12h34v12" fill="#272e2a" stroke="#171c1a" stroke-width="5"/>
+      <path d="M48 211v-22q12-15 24 0v22z" fill="url(#copper)"
+            stroke="#171c1a" stroke-width="6"/>
+      <path d="M148 211v-22q12-15 24 0v22z" fill="#d8d2b6"
+            stroke="#171c1a" stroke-width="6"/>
+      <path d="M60 190v19M160 190v19" stroke="#3e2b27" stroke-width="3"/>
+
+      <g transform="translate(34 57)"><use xlink:href="#bolt"/></g>
+      <g transform="translate(106 57)"><use xlink:href="#bolt"/></g>
+      <g transform="translate(214 57)"><use xlink:href="#bolt"/></g>
+      <g transform="translate(286 57)"><use xlink:href="#bolt"/></g>
+      <g transform="translate(128 57)"><use xlink:href="#bolt"/></g>
+      <g transform="translate(192 57)"><use xlink:href="#bolt"/></g>
+      <g transform="translate(32 178)"><use xlink:href="#bolt"/></g>
+      <g transform="translate(288 178)"><use xlink:href="#bolt"/></g>
+    </g>
+
+    <g id="left-off">
+      <rect x="39" y="73" width="62" height="68" rx="5"
+            fill="#161d1c" stroke="#0e1312" stroke-width="4"/>
+      <path d="M46 82h48M46 94h48M46 106h48M46 118h48M46 130h48"
+            stroke="#3e4641" stroke-width="7" stroke-linecap="round"/>
+      <path d="M46 80h36" stroke="#666c63" stroke-width="2" opacity=".55"/>
+    </g>
+
+    <g id="left-on">
+      <rect x="39" y="73" width="62" height="68" rx="5"
+            fill="#123c3b" stroke="#0e2928" stroke-width="4"/>
+      <path d="M46 82h48M46 94h48M46 106h48M46 118h48M46 130h48"
+            stroke="url(#cyan)" stroke-width="7" stroke-linecap="round"/>
+      <path d="M48 79h39" stroke="#dcfffa" stroke-width="2" opacity=".75"/>
+    </g>
+
+    <g id="right-off">
+      <rect x="219" y="73" width="62" height="68" rx="5"
+            fill="#161d1c" stroke="#0e1312" stroke-width="4"/>
+      <path d="M226 82h48M226 94h48M226 106h48M226 118h48M226 130h48"
+            stroke="#3e4641" stroke-width="7" stroke-linecap="round"/>
+      <path d="M226 80h36" stroke="#666c63" stroke-width="2" opacity=".55"/>
+    </g>
+
+    <g id="right-on">
+      <rect x="219" y="73" width="62" height="68" rx="5"
+            fill="#4b3212" stroke="#2a1c0d" stroke-width="4"/>
+      <path d="M226 82h48M226 94h48M226 106h48M226 118h48M226 130h48"
+            stroke="url(#amber)" stroke-width="7" stroke-linecap="round"/>
+      <path d="M228 79h39" stroke="#fff1a0" stroke-width="2" opacity=".75"/>
+    </g>
+
+    <g id="switch-idle">
+      <path d="M139 69l9-16 9 16z" fill="#315554" stroke="#171c1a" stroke-width="4"/>
+      <circle cx="177" cy="63" r="10" fill="#5a4927" stroke="#171c1a" stroke-width="4"/>
+      <rect x="135" y="85" width="50" height="69" rx="7"
+            fill="#3e433d" stroke="#171c1a" stroke-width="5"/>
+      <circle cx="160" cy="137" r="9" fill="#252a27" stroke="#141817" stroke-width="4"/>
+      <path d="M160 134v-31" stroke="#1a1f1d" stroke-width="11" stroke-linecap="round"/>
+      <path d="M160 134v-31" stroke="#a6633b" stroke-width="6" stroke-linecap="round"/>
+      <path d="M151 98h18v14h-18z" fill="url(#copper)" stroke="#171c1a" stroke-width="4"/>
+    </g>
+
+    <g id="switch-working">
+      <path d="M139 69l9-16 9 16z" fill="url(#cyan)" stroke="#171c1a" stroke-width="4"/>
+      <circle cx="177" cy="63" r="10" fill="url(#amber)" stroke="#171c1a" stroke-width="4"/>
+      <rect x="135" y="85" width="50" height="69" rx="7"
+            fill="#3e433d" stroke="#171c1a" stroke-width="5"/>
+      <circle cx="160" cy="137" r="9" fill="#252a27" stroke="#141817" stroke-width="4"/>
+      <path d="M160 134l16-28" stroke="#1a1f1d" stroke-width="11" stroke-linecap="round"/>
+      <path d="M160 134l16-28" stroke="#b26a3d" stroke-width="6" stroke-linecap="round"/>
+      <path d="M170 99l16 9-7 12-16-9z" fill="url(#copper)"
+            stroke="#171c1a" stroke-width="4"/>
+      <path d="M135 77l6-4M185 77l-6-4" stroke="#ffdc6a" stroke-width="3"
+            stroke-linecap="round"/>
+    </g>
+
+    <g id="switch-broken">
+      <path d="M139 69l9-16 9 16z" fill="#202725" stroke="#171c1a" stroke-width="4"/>
+      <circle cx="177" cy="63" r="10" fill="#252a27" stroke="#171c1a" stroke-width="4"/>
+      <rect x="135" y="85" width="50" height="69" rx="7"
+            fill="#373c38" stroke="#171c1a" stroke-width="5"/>
+      <circle cx="160" cy="137" r="9" fill="#252a27" stroke="#141817" stroke-width="4"/>
+      <path d="M160 134l10-16-6-10 12-10" fill="none" stroke="#1a1f1d"
+            stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M160 134l10-16-6-10 12-10" fill="none" stroke="#7d4e34"
+            stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M171 91l15 10-8 12-14-10z" fill="#8d5638"
+            stroke="#171c1a" stroke-width="4"/>
+    </g>
+
+    <g id="damage">
+      <path d="M117 78l12 13-8 13 13 12-7 18M201 92l-12 10 8 13-10 10"
+            fill="none" stroke="#171c1a" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M186 148l23 10-9 22-24-8z" fill="#4d514a"
+            stroke="#171c1a" stroke-width="5"/>
+      <path d="M278 43l7-9M286 48l12-3M279 50l5 11"
+            stroke="#ffd461" stroke-width="3" stroke-linecap="round"/>
+      <path d="M24 123l-10 8v14M298 132l10 6v14"
+            fill="none" stroke="#733b30" stroke-width="5" stroke-linecap="round"/>
+    </g>
+
+    <g id="assembled">
+      <use xlink:href="#body-art"/>
+      <use xlink:href="#left-off"/>
+      <use xlink:href="#right-off"/>
+      <use xlink:href="#switch-idle"/>
+    </g>
+
+    <g id="build-art">
+      <path d="M24 172h271M33 48v125M108 48v125M208 48v125M287 48v125"
+            fill="none" stroke="#8f7350" stroke-width="7" stroke-linecap="round"/>
+      <path d="M22 71l88 83M110 71l-87 83M207 71l81 83M288 71l-80 83"
+            fill="none" stroke="#8f7350" stroke-width="5" opacity=".8"/>
+      <path d="M120 72h79v100h-79z" fill="#555a53" stroke="#171c1a" stroke-width="6"/>
+      <path d="M130 88h58M130 104h45M130 120h58"
+            stroke="#343a36" stroke-width="8" stroke-linecap="round"/>
+      <path d="M24 172h271v22H24z" fill="url(#edge)" stroke="#171c1a" stroke-width="6"/>
+      <path d="M48 211v-22q12-15 24 0v22z" fill="url(#copper)"
+            stroke="#171c1a" stroke-width="6"/>
+      <path d="M148 211v-22q12-15 24 0v22z" fill="#d8d2b6"
+            stroke="#171c1a" stroke-width="6"/>
+      <path d="M36 157l22-18 18 18zM233 157l20-22 21 22z"
+            fill="#b69258" stroke="#332a20" stroke-width="4"/>
+    </g>
+  </defs>
+
+  <!-- 320x220 source tiles; transparent outside the art. -->
+  <g transform="translate(0 0)">
+    <use xlink:href="#body-art"/>
+    <use xlink:href="#insulator" transform="translate(61 17)"/>
+    <use xlink:href="#insulator" transform="translate(259 17)"/>
+    <use xlink:href="#bolt" transform="translate(34 57)"/>
+    <use xlink:href="#bolt" transform="translate(106 57)"/>
+    <use xlink:href="#bolt" transform="translate(214 57)"/>
+    <use xlink:href="#bolt" transform="translate(286 57)"/>
+    <use xlink:href="#bolt" transform="translate(128 57)"/>
+    <use xlink:href="#bolt" transform="translate(192 57)"/>
+    <use xlink:href="#bolt" transform="translate(32 178)"/>
+    <use xlink:href="#bolt" transform="translate(288 178)"/>
+  </g>
+  <g transform="translate(320 0)"><use xlink:href="#left-off"/></g>
+  <g transform="translate(640 0)"><use xlink:href="#left-on"/></g>
+  <g transform="translate(0 220)"><use xlink:href="#right-off"/></g>
+  <g transform="translate(320 220)"><use xlink:href="#right-on"/></g>
+  <g transform="translate(640 220)"><use xlink:href="#switch-idle"/></g>
+  <g transform="translate(0 440)"><use xlink:href="#switch-working"/></g>
+  <g transform="translate(320 440)"><use xlink:href="#switch-broken"/></g>
+  <g transform="translate(640 440)"><use xlink:href="#damage"/></g>
+  <g transform="translate(0 660)"><use xlink:href="#build-art"/></g>
+  <g transform="translate(320 660)">
+    <g transform="translate(96 120) scale(0.4)">
+      <use xlink:href="#body-art"/>
+      <use xlink:href="#insulator" transform="translate(61 17)"/>
+      <use xlink:href="#insulator" transform="translate(259 17)"/>
+      <use xlink:href="#left-off"/>
+      <use xlink:href="#right-off"/>
+      <use xlink:href="#switch-idle"/>
+    </g>
+  </g>
+  <g transform="translate(640 660)">
+    <use xlink:href="#body-art"/>
+    <use xlink:href="#insulator" transform="translate(61 17)"/>
+    <use xlink:href="#insulator" transform="translate(259 17)"/>
+    <use xlink:href="#left-off"/>
+    <use xlink:href="#right-off"/>
+    <use xlink:href="#switch-idle"/>
+  </g>
+</svg>

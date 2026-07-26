@@ -23,7 +23,7 @@ namespace BatterySwitcher
             Building = new PBuilding(Id, "Battery Switcher")
             {
                 AddAfter = BatterySmartConfig.ID,
-                Animation = "smartbattery_kanim",
+                Animation = "batteryswitcher_kanim",
                 Category = new HashedString("Power"),
                 ConstructionTime = 60f,
                 Decor = TUNING.BUILDINGS.DECOR.PENALTY.TIER2,
@@ -32,7 +32,7 @@ namespace BatterySwitcher
                 Height = 2,
                 HP = 30,
                 Placement = BuildLocationRule.OnFloor,
-                PowerInput = new PowerRequirement(InputWattage, new CellOffset(0, 0)),
+                PowerInput = new PowerRequirement(InputWattage, new CellOffset(-1, 0)),
                 PowerOutput = new PowerRequirement(0f, new CellOffset(1, 0)),
                 SubCategory = "batteries",
                 Tech = "Acoustics",

@@ -89,7 +89,7 @@ Switcher's capacity remains the serialized numeric buffer; the native input
 battery is only a zero-leak 1 kJ circuit-transfer accumulator. It is registered
 as transformer input so ONI includes charging in current wire load; the
 zero-draw input consumer preserves the 1 kW potential load. The verified input
-port offset is `(0, 0)`; the output remains `(1, 0)`.
+port offset is `(-1, 0)`; the output remains `(1, 0)`.
 
 ### Gate
 
@@ -157,7 +157,7 @@ Then implement:
 - [x] Repeat the phase-5 manual gate with final values.
 
 Final values retain the phase-5-tested 20 kJ per buffer, 1 kW input, 80%/30%
-switching thresholds, 400 kg refined-metal cost, 3×2 footprint, input `(0, 0)`,
+switching thresholds, 400 kg refined-metal cost, 3×2 footprint, input `(-1, 0)`,
 and output `(1, 0)`. U59's `BatterySmartConfig` sets active self-heat directly
 to 0.5 kDTU/s, so Battery Switcher uses 1.0 kDTU/s for its two battery sections
 plus the named 0.05 kDTU/s switching margin. Active means that output energy
@@ -170,19 +170,25 @@ moved during the latest simulation update; charging alone produces no heat.
 
 ## Phase 7 — custom KAnim
 
-- [ ] Produce and approve concept art only after the phase-6 footprint gate.
-- [ ] Convert the design into clean layered sprites with two battery sections,
+- [x] Produce and approve concept art only after the phase-6 footprint gate.
+- [x] Convert the design into clean layered sprites with two battery sections,
       a central controller, and clear non-text A/B indicators.
-- [ ] Build at least build, idle/off, working, and broken states where the
+- [x] Build at least build, idle/off, working, and broken states where the
       building behavior supports them.
-- [ ] Keep pivots, footprint, ports, building ID, and serialized fields
+- [x] Keep pivots, footprint, ports, building ID, and serialized fields
       unchanged.
-- [ ] Keep source art outside the runtime package.
+- [x] Keep source art outside the runtime package.
+
+The final world art is 290×215 px inside the frozen 3×2 footprint. The
+dedicated 116×86 px `ui` sprite prevents the Power-menu icon from rendering at
+building scale. The layered SVG and SCML sources remain under `art/`; the
+runtime package receives only the compiled atlas, build bytes, and animation
+bytes.
 
 ### Gate
 
-- [ ] Every animation state aligns with the building and ports in game.
-- [ ] Save/load remains compatible after replacing the temporary animation.
+- [x] Every animation state aligns with the building and ports in game.
+- [x] Save/load remains compatible after replacing the temporary animation.
 
 ## Phase 8 — release packaging
 
