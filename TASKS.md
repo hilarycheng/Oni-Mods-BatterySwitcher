@@ -55,15 +55,17 @@ Run `dotnet build` after every code change.
 - [x] Fail locally with one clear log message if a required public API is
       unavailable.
 
-PLib's pinned `PowerRequirement` maps the input to ONI's `EnergyConsumer` and
-the output to `EnergyGenerator`. Those public components use their distinct
-building offsets and own their `CircuitManager` spawn/cleanup registration.
+PLib's pinned `PowerRequirement` maps the input to ONI's `EnergyConsumer`.
+Its fuel-oriented `EnergyGenerator` is replaced with ONI's public base
+`Generator`, because U59's `EnergyGenerator` requires a non-empty fuel formula.
+The consumer and generator use distinct building offsets and own their
+`CircuitManager` spawn/cleanup registration.
 
 ### Gate
 
-- [ ] Input and output wires report different circuits in game.
-- [ ] Connecting or disconnecting either side does not alter the other side.
-- [ ] Save/load and deconstruction cleanly restore/remove both connections.
+- [x] Input and output wires report different circuits in game.
+- [x] Connecting or disconnecting either side does not alter the other side.
+- [x] Save/load and deconstruction cleanly restore/remove both connections.
 
 ## Phase 4 — one numeric buffer
 

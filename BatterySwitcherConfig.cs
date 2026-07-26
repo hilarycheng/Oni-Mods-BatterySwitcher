@@ -65,6 +65,8 @@ namespace BatterySwitcher
         public override void DoPostConfigureComplete(GameObject go)
         {
             Building.DoPostConfigureComplete(go);
+            UnityEngine.Object.DestroyImmediate(go.GetComponent<EnergyGenerator>());
+            go.AddOrGet<Generator>();
         }
     }
 }
