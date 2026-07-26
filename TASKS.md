@@ -69,20 +69,27 @@ The consumer and generator use distinct building offsets and own their
 
 ## Phase 4 — one numeric buffer
 
-- [ ] Confirm the initial per-buffer capacity and input/output wattage before
+- [x] Confirm the initial per-buffer capacity and input/output wattage before
       implementing energy transfer.
-- [ ] Add `BatterySwitcherController.cs` using a simulation callback found in
+- [x] Add `BatterySwitcherController.cs` using a simulation callback found in
       the installed assemblies, never `Update()` or wall-clock time.
-- [ ] Serialize the first buffer with its permanent field name.
-- [ ] Verify input-to-buffer and buffer-to-output accounting independently.
-- [ ] Clamp energy to `[0, capacity]` and account from actual transferred
+- [x] Serialize the first buffer with its permanent field name.
+- [x] Verify input-to-buffer and buffer-to-output accounting independently.
+- [x] Clamp energy to `[0, capacity]` and account from actual transferred
       energy.
-- [ ] Verify a delayed large simulation update produces the same energy result
+- [x] Verify a delayed large simulation update produces the same energy result
       as equivalent smaller updates.
+
+Initial phase-4 values are 20 kJ per buffer and 1 kW on each port. U59's
+`PowerTransformer` is the transfer reference: an input `Battery` records actual
+circuit energy, while `Generator.ApplyDeltaJoules` reports actual output
+consumption. Battery Switcher's capacity remains the serialized numeric buffer;
+the native input battery is only a zero-leak 1 kJ circuit-transfer accumulator.
+The verified input port offset is `(0, 0)`; the output remains `(1, 0)`.
 
 ### Gate
 
-- [ ] One-buffer charge, discharge, save/load, pause/resume, and all game
+- [x] One-buffer charge, discharge, save/load, pause/resume, and all game
       speeds conserve energy and remain in bounds.
 
 ## Phase 5 — deterministic two-buffer switching
