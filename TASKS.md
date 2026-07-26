@@ -147,19 +147,26 @@ Then implement:
 
 ## Phase 6 — heat and final balance
 
-- [ ] Confirm final capacities, wattages, construction cost, footprint, and
+- [x] Confirm final capacities, wattages, construction cost, footprint, and
       switching policy.
-- [ ] Read the current Smart Battery active heat from stable game data where
+- [x] Read the current Smart Battery active heat from stable game data where
       practical.
-- [ ] Set active heat to twice that value plus one named switching-margin
+- [x] Set active heat to twice that value plus one named switching-margin
       constant equal initially to 10% of one Smart Battery's active heat.
-- [ ] Add no leakage, efficiency loss, automation behavior, or capacity change.
-- [ ] Repeat the phase-5 manual gate with final values.
+- [x] Add no leakage, efficiency loss, automation behavior, or capacity change.
+- [x] Repeat the phase-5 manual gate with final values.
+
+Final values retain the phase-5-tested 20 kJ per buffer, 1 kW input, 80%/30%
+switching thresholds, 400 kg refined-metal cost, 3×2 footprint, input `(0, 0)`,
+and output `(1, 0)`. U59's `BatterySmartConfig` sets active self-heat directly
+to 0.5 kDTU/s, so Battery Switcher uses 1.0 kDTU/s for its two battery sections
+plus the named 0.05 kDTU/s switching margin. Active means that output energy
+moved during the latest simulation update; charging alone produces no heat.
 
 ### Gate
 
-- [ ] Final electrical behavior, heat, and balance values pass in game.
-- [ ] Footprint and both port offsets are frozen.
+- [x] Final electrical behavior, heat, and balance values pass in game.
+- [x] Footprint and both port offsets are frozen.
 
 ## Phase 7 — custom KAnim
 

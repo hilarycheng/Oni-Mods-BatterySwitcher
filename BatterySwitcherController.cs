@@ -4,7 +4,7 @@ using UnityEngine;
 namespace BatterySwitcher
 {
     [SerializationConfig(MemberSerialization.OptIn)]
-    public sealed class BatterySwitcherController : PowerTransformer
+    public sealed class BatterySwitcherController : PowerTransformer, ISimEveryTick
     {
         [Serialize]
         private float batteryAEnergy;
@@ -17,6 +17,7 @@ namespace BatterySwitcher
 
         private static StatusItem bufferStatus;
         private Battery inputBattery;
+        private bool outputEnergyTransferred;
 
         protected override void OnSpawn()
         {
@@ -46,6 +47,7 @@ namespace BatterySwitcher
         public override void EnergySim200ms(float dt)
         {
             base.EnergySim200ms(dt);
+            outputEnergyTransferred = false;
             batteryAEnergy = ClampEnergy(batteryAEnergy);
             batteryBEnergy = ClampEnergy(batteryBEnergy);
 
@@ -95,6 +97,7 @@ namespace BatterySwitcher
 
                     SupplyingEnergy = ClampEnergy(SupplyingEnergy - transferred);
                     remaining -= transferred;
+                    outputEnergyTransferred = true;
                 }
                 SwitchAtBoundary();
             }
@@ -102,6 +105,11 @@ namespace BatterySwitcher
                 JoulesAvailable + joules,
                 0f,
                 doDisease ? float.MaxValue : Capacity));
+        }
+
+        public void SimEveryTick(float _)
+        {
+            operational.SetActive(outputEnergyTransferred);
         }
 
         private float ChargingEnergy

@@ -13,6 +13,8 @@ namespace BatterySwitcher
         internal const float ChargeStopEnergy = BufferCapacity * 0.8f;
         internal const float DischargeStopEnergy = BufferCapacity * 0.3f;
         internal const float InputWattage = 1000f;
+        internal const float SmartBatteryActiveHeat = 0.5f;
+        internal const float SwitchingHeatMargin = SmartBatteryActiveHeat * 0.1f;
 
         internal static PBuilding Building { get; private set; }
 
@@ -56,6 +58,8 @@ namespace BatterySwitcher
                 def = Building.CreateDef();
             }
             def.GeneratorBaseCapacity = 2f * BufferCapacity;
+            def.SelfHeatKilowattsWhenActive =
+                2f * SmartBatteryActiveHeat + SwitchingHeatMargin;
             def.AddSearchTerms(SEARCH_TERMS.POWER);
             def.AddSearchTerms(SEARCH_TERMS.BATTERY);
             return def;
