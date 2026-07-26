@@ -1,0 +1,9 @@
+bin/
+obj/
+.agents/
+.codex/
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
