@@ -1,3 +1,4 @@
+using System;
 using PeterHan.PLib.Buildings;
 using STRINGS;
 using TUNING;
@@ -21,10 +22,12 @@ namespace BatterySwitcher
                 ConstructionTime = 60f,
                 Decor = TUNING.BUILDINGS.DECOR.PENALTY.TIER2,
                 Description = "A switching device with two isolated internal battery sections.",
-                EffectText = "Phase 1 prototype. It has no power connections or electrical behavior.",
+                EffectText = "Phase 3 prototype. Its input and output connections are isolated but transfer no energy.",
                 Height = 2,
                 HP = 30,
                 Placement = BuildLocationRule.OnFloor,
+                PowerInput = new PowerRequirement(0f, new CellOffset(-1, 0)),
+                PowerOutput = new PowerRequirement(0f, new CellOffset(1, 0)),
                 SubCategory = "batteries",
                 Tech = "Acoustics",
                 ViewMode = OverlayModes.Power.ID,
@@ -36,7 +39,18 @@ namespace BatterySwitcher
 
         public override BuildingDef CreateBuildingDef()
         {
-            BuildingDef def = Building.CreateDef();
+            BuildingDef def;
+            try
+            {
+                def = Building.CreateDef();
+            }
+            catch (MissingMemberException exception)
+            {
+                Debug.LogError($"[BatterySwitcher] Power ports disabled: required public power API is unavailable ({exception.GetType().Name}).");
+                Building.PowerInput = null;
+                Building.PowerOutput = null;
+                def = Building.CreateDef();
+            }
             def.AddSearchTerms(SEARCH_TERMS.POWER);
             def.AddSearchTerms(SEARCH_TERMS.BATTERY);
             return def;

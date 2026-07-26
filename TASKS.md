@@ -45,15 +45,19 @@ Run `dotnet build` after every code change.
 
 ## Phase 3 — isolated power connections
 
-- [ ] Inspect the installed ONI assemblies for the current public power-port,
+- [x] Inspect the installed ONI assemblies for the current public power-port,
       circuit-registration, and simulation APIs.
-- [ ] State the selected API assumptions before implementation.
-- [ ] Add fixed input and output port offsets without changing the verified
+- [x] State the selected API assumptions before implementation.
+- [x] Add fixed input and output port offsets without changing the verified
       footprint.
-- [ ] Register each port to its own external circuit; do not patch power
+- [x] Register each port to its own external circuit; do not patch power
       simulation internals.
-- [ ] Fail locally with one clear log message if a required public API is
+- [x] Fail locally with one clear log message if a required public API is
       unavailable.
+
+PLib's pinned `PowerRequirement` maps the input to ONI's `EnergyConsumer` and
+the output to `EnergyGenerator`. Those public components use their distinct
+building offsets and own their `CircuitManager` spawn/cleanup registration.
 
 ### Gate
 
