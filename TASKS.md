@@ -190,7 +190,43 @@ bytes.
 - [x] Every animation state aligns with the building and ports in game.
 - [x] Save/load remains compatible after replacing the temporary animation.
 
-## Phase 8 — release packaging
+## Phase 8 — runtime per-buffer thresholds
+
+Before coding:
+
+- [x] Use independent low/high thresholds for battery A and battery B.
+- [x] Store thresholds per building as serialized integer percentages, defaulting
+      to 30%/80%.
+- [x] Enforce `0 <= low < high <= 100` with a minimum 1% gap.
+- [x] Keep threshold changes simulation-driven: UI callbacks change only the
+      configured values; the next simulation update handles stopping or
+      switching.
+- [x] Use one custom PLib UI side screen because U59's public
+      `IActivationRangeTarget` side screen supports only one threshold pair per
+      selected object.
+
+Then implement:
+
+- [ ] Add permanent serialized A/B low/high fields and deterministic repair for
+      missing, invalid, or out-of-range loaded values.
+- [ ] Apply each physical buffer's high threshold while charging and low
+      threshold while supplying, regardless of its current role.
+- [ ] Add four whole-percentage runtime controls without a global Options
+      screen or another dependency.
+- [ ] Show both configured ranges in the selected-building status.
+- [ ] If side-screen registration fails, retain the default thresholds and emit
+      one clear log message without disabling the building.
+
+### Gate
+
+- [ ] Each threshold can be changed independently while running or paused.
+- [ ] Existing saves load with 30%/80% defaults; new values survive save/load.
+- [ ] Boundary edits, both-empty, both-full, insufficient input, excess demand,
+      pause/resume, all speeds, and rapid speed changes preserve valid roles and
+      energy bounds.
+- [ ] No repeated BatterySwitcher exceptions appear in `Player.log`.
+
+## Phase 9 — release packaging
 
 ### Pre-release corrections
 
