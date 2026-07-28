@@ -10,8 +10,8 @@ namespace BatterySwitcher
     {
         public const string Id = "BatterySwitcher";
         internal const float BufferCapacity = 20000f;
-        internal const float ChargeStopEnergy = BufferCapacity * 0.8f;
-        internal const float DischargeStopEnergy = BufferCapacity * 0.3f;
+        internal const int DefaultLowPercent = 30;
+        internal const int DefaultHighPercent = 80;
         internal const float InputWattage = 1000f;
         internal const float SmartBatteryActiveHeat = 0.5f;
         internal const float SwitchingHeatMargin = SmartBatteryActiveHeat * 0.1f;

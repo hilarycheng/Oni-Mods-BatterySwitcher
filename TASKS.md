@@ -207,14 +207,14 @@ Before coding:
 
 Then implement:
 
-- [ ] Add permanent serialized A/B low/high fields and deterministic repair for
+- [x] Add permanent serialized A/B low/high fields and deterministic repair for
       missing, invalid, or out-of-range loaded values.
-- [ ] Apply each physical buffer's high threshold while charging and low
+- [x] Apply each physical buffer's high threshold while charging and low
       threshold while supplying, regardless of its current role.
-- [ ] Add four whole-percentage runtime controls without a global Options
+- [x] Add four whole-percentage runtime controls without a global Options
       screen or another dependency.
-- [ ] Show both configured ranges in the selected-building status.
-- [ ] If side-screen registration fails, retain the default thresholds and emit
+- [x] Show both configured ranges in the selected-building status.
+- [x] If side-screen registration fails, retain the default thresholds and emit
       one clear log message without disabling the building.
 
 ### Gate
