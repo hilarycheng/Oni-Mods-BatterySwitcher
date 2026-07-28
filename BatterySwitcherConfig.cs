@@ -27,7 +27,7 @@ namespace BatterySwitcher
                 Category = new HashedString("Power"),
                 ConstructionTime = 60f,
                 Decor = TUNING.BUILDINGS.DECOR.PENALTY.TIER2,
-                Description = "A switching device with two isolated internal battery sections.",
+                Description = "Two internal batteries alternate: one charges from the input circuit while the other supplies the output circuit.",
                 EffectText = "Transfers power through two alternating internal 20 kJ energy buffers.",
                 Height = 2,
                 HP = 30,
