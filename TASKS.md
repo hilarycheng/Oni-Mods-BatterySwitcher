@@ -192,17 +192,105 @@ bytes.
 
 ## Phase 8 — release packaging
 
-- [ ] Produce a clean runtime package containing only
-      `BatterySwitcher.dll`, `mod.yaml`, `mod_info.yaml`, and required
-      `anim/` files.
-- [ ] Inspect the final DLL and package for accidentally shipped development,
-      framework, Harmony, ONI, Unity, or decompiler files.
-- [ ] Test local installation from the clean package.
-- [ ] Test Workshop upload metadata, preview image if added, and archived
-      version loading.
-- [ ] Run the complete manual test list from `AGENTS.md` on the release build.
+### Pre-release corrections
+
+- [ ] Make the missing-power-API fallback leave the building inert without
+      dereferencing an absent `EnergyConsumer`.
+- [ ] Investigate the `System.Net.Http` and `System.IO.Compression` build
+      warnings. Suppress them only after confirming they are harmless.
+- [ ] Replace deprecated `supportedContent` metadata with the current minimal
+      unrestricted `mod_info.yaml`, using the build actually tested:
+
+  ```yaml
+  minimumSupportedBuild: 740622
+  version: 0.1.0
+  APIVersion: 2
+  ```
+
+  Update `minimumSupportedBuild` again if the final test uses a newer game
+  build. Add `requiredDlcIds` or `forbiddenDlcIds` only if a real restriction
+  is introduced.
+- [ ] Keep the project, `mod_info.yaml`, Workshop listing, and release tag on
+      the same version.
+- [ ] Preserve the MIT notices for Battery Switcher and the merged PLib,
+      including `Copyright 2025 Peter Han`, in the release package.
+
+Current metadata guidance:
+https://forums.kleientertainment.com/forums/topic/158363-setting-up-mod_infoyaml-and-archived_versions/
+
+### Build and package
+
+- [ ] Run `dotnet build -c Release` against the final checked-in source.
+- [ ] Assemble a fresh upload directory containing only:
+
+  ```text
+  BatterySwitcher.dll
+  LICENSE
+  mod.yaml
+  mod_info.yaml
+  preview.png
+  anim/assets/batteryswitcher/batteryswitcher_0.png
+  anim/assets/batteryswitcher/batteryswitcher_anim.bytes
+  anim/assets/batteryswitcher/batteryswitcher_build.bytes
+  ```
+
+- [ ] Use a square, legible `preview.png`, preferably an in-game screenshot,
+      and keep it under 1 MB.
+- [ ] Confirm the package contains no `PDB`, `.deps.json`, source art, `bin/`,
+      `obj/`, decompiler files, development assemblies, Harmony, ONI, Unity,
+      PLib, or .NET runtime DLLs.
+- [ ] Confirm PLib is merged into `BatterySwitcher.dll` and the only shipped
+      DLL is `BatterySwitcher.dll`.
+- [ ] Record the final DLL/package hash. Deploy and test these exact bytes;
+      do not substitute a later rebuild without repeating the release gate.
+
+### Local release test
+
+- [ ] Install only the clean package in the local mod directory.
+- [ ] Disable unrelated mods and run the complete manual test list from
+      `AGENTS.md` on the release build.
+- [ ] Test both unrestricted content configurations claimed by the metadata,
+      at minimum base-game and Spaced Out content modes.
+- [ ] Pass a new-game test and load a save created by an earlier tested build
+      with Battery Switcher present.
+- [ ] Recheck construction, selection, deconstruction, save/load, isolated
+      circuits, every buffer boundary, pause/resume, all speeds, rapid speed
+      changes, insufficient input, and excess demand.
+- [ ] Exit normally and confirm `Player.log` contains no repeated
+      BatterySwitcher exception or error.
+
+### Workshop dry run
+
+- [ ] Install **Oxygen Not Included Uploader** from Steam Library → Tools.
+- [ ] Prepare the Workshop title, description, change note, appropriate tags,
+      tested game build, feature summary, and source-repository link.
+- [ ] Upload with hidden visibility first and accept the Steam Workshop legal
+      agreement before making the item public.
+- [ ] Subscribe to the hidden Workshop item, then remove or disable the local
+      copy so two mods with `hilary.BatterySwitcher` cannot mask each other.
+- [ ] Confirm Steam downloads the expected version and exact runtime files.
+- [ ] Repeat the new-game and archived-save smoke tests using only the
+      Workshop-downloaded copy.
+- [ ] Check the Workshop page, preview, description, tags, visibility, and
+      subscriber installation before publishing publicly.
+
+Steam upload guidance:
+https://partner.steamgames.com/doc/features/workshop/implementation
+
+### Archived versions and publication
+
+- [ ] Perform one local `archived_versions` selection test using a copy of the
+      clean package and its own `mod_info.yaml`.
+- [ ] Do not ship a redundant archived copy in the first `0.1.0` release.
+      Add an archive only before a later incompatible game-build, DLC, or
+      public-testing update.
+- [ ] Make the Workshop item public only after the subscribed-copy test passes.
+- [ ] Commit any final metadata or documentation changes with a Conventional
+      Commit, tag that commit `v0.1.0`, and record the Workshop URL.
 
 ### Gate
 
-- [ ] Clean release package passes a new-game test and an archived-save test
-      without repeated exceptions.
+- [ ] The exact clean release package passes local and Workshop-subscribed
+      new-game and archived-save tests without repeated exceptions.
+- [ ] The public Workshop download contains only the approved release files
+      and loads with the documented version and compatibility metadata.
