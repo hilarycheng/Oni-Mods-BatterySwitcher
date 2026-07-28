@@ -55,11 +55,12 @@ Run `dotnet build` after every code change.
 - [x] Fail locally with one clear log message if a required public API is
       unavailable.
 
-PLib's pinned `PowerRequirement` maps the input to ONI's `EnergyConsumer`.
-Its fuel-oriented `EnergyGenerator` is replaced with ONI's public base
-`Generator`, because U59's `EnergyGenerator` requires a non-empty fuel formula.
-The consumer and generator use distinct building offsets and own their
-`CircuitManager` spawn/cleanup registration.
+PLib's pinned `PowerRequirement` establishes the distinct input and output
+building offsets. Its generated input `EnergyConsumer` is removed at runtime so
+the native transfer `Battery` is the only input-circuit load. Its fuel-oriented
+`EnergyGenerator` is replaced with ONI's public base `Generator`, because U59's
+`EnergyGenerator` requires a non-empty fuel formula. The battery and generator
+own their `CircuitManager` spawn/cleanup registration.
 
 ### Gate
 
@@ -87,8 +88,8 @@ transfer reference: an input `Battery` records actual circuit energy, while
 `Generator.ApplyDeltaJoules` reports actual output consumption. Battery
 Switcher's capacity remains the serialized numeric buffer; the native input
 battery is only a zero-leak 1 kJ circuit-transfer accumulator. It is registered
-as transformer input so ONI includes charging in current wire load; the
-zero-draw input consumer preserves the 1 kW potential load. The verified input
+as transformer input and is the sole runtime input consumer, so ONI accounts
+its 1 kW charging load without competing building demand. The verified input
 port offset is `(-1, 0)`; the output remains `(1, 0)`.
 
 ### Gate
@@ -280,10 +281,10 @@ https://forums.kleientertainment.com/forums/topic/158363-setting-up-mod_infoyaml
 - [ ] Record the final DLL/package hash. Deploy and test these exact bytes;
       do not substitute a later rebuild without repeating the release gate.
 
-Current release candidate hashes:
+Current locally tested DLL:
 
-- DLL SHA-256: `151a2442ee385a3ef4ba25abbbe2a317ad1ab6474629c0fd695846bd8290072d`
-- ZIP SHA-256: `ceb2156efb6f7e90fee66b37b84f44417360f9695f786944e040e4f0e7193889`
+- DLL SHA-256: `74bdfded502133b50a2c0fc1aa2fa5ab6737cbacbb18302c2920b27cd5b12c62`
+- ZIP SHA-256: pending final package rebuild.
 
 ### Local release test
 

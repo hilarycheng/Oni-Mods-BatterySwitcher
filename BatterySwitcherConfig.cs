@@ -79,7 +79,7 @@ namespace BatterySwitcher
                 return;
 
             UnityEngine.Object.DestroyImmediate(go.GetComponent<EnergyGenerator>());
-            consumer.BaseWattageRating = 0f;
+            UnityEngine.Object.DestroyImmediate(consumer);
             Battery input = go.AddOrGet<Battery>();
             input.capacity = InputWattage;
             input.chargeWattage = InputWattage;

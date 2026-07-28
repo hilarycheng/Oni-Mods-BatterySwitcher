@@ -67,17 +67,16 @@ namespace BatterySwitcher
             batteryBEnergy = ClampEnergy(batteryBEnergy);
             RepairThresholds();
 
-            while (inputBattery.JoulesAvailable > 0f)
+            SwitchAtBoundary();
+            float inputTransferred = Mathf.Min(
+                inputBattery.JoulesAvailable,
+                Mathf.Min(
+                    BatterySwitcherConfig.InputWattage * dt,
+                    Mathf.Max(0f, ChargingHighEnergy - ChargingEnergy)));
+            if (inputTransferred > 0f)
             {
-                SwitchAtBoundary();
-                float transferred = Mathf.Min(
-                    inputBattery.JoulesAvailable,
-                    ChargingHighEnergy - ChargingEnergy);
-                if (transferred <= 0f)
-                    break;
-
-                inputBattery.ConsumeEnergy(transferred, false);
-                ChargingEnergy = ClampEnergy(ChargingEnergy + transferred);
+                inputBattery.ConsumeEnergy(inputTransferred, false);
+                ChargingEnergy = ClampEnergy(ChargingEnergy + inputTransferred);
             }
 
             SwitchAtBoundary();
@@ -88,10 +87,6 @@ namespace BatterySwitcher
             float outputAvailable = Mathf.Max(
                 0f,
                 SupplyingEnergy - SupplyingLowEnergy);
-            if (ChargingEnergy >= ChargingHighEnergy)
-                outputAvailable += Mathf.Max(
-                    0f,
-                    ChargingEnergy - ChargingLowEnergy);
             AssignJoulesAvailable(outputAvailable);
         }
 
@@ -99,23 +94,16 @@ namespace BatterySwitcher
         {
             if (joules < 0f)
             {
-                float remaining = -joules;
-                while (remaining > 0f)
+                float transferred = Mathf.Min(
+                    -joules,
+                    Mathf.Max(
+                        0f,
+                        SupplyingEnergy - SupplyingLowEnergy));
+                if (transferred > 0f)
                 {
-                    SwitchAtBoundary();
-                    float transferred = Mathf.Min(
-                        remaining,
-                        Mathf.Max(
-                            0f,
-                            SupplyingEnergy - SupplyingLowEnergy));
-                    if (transferred <= 0f)
-                        break;
-
                     SupplyingEnergy = ClampEnergy(SupplyingEnergy - transferred);
-                    remaining -= transferred;
                     outputEnergyTransferred = true;
                 }
-                SwitchAtBoundary();
             }
             AssignJoulesAvailable(Mathf.Clamp(
                 JoulesAvailable + joules,
@@ -154,9 +142,6 @@ namespace BatterySwitcher
 
         private float ChargingHighEnergy => PercentToEnergy(
             batteryAIsCharging ? batteryAHighPercent : batteryBHighPercent);
-
-        private float ChargingLowEnergy => PercentToEnergy(
-            batteryAIsCharging ? batteryALowPercent : batteryBLowPercent);
 
         private float SupplyingLowEnergy => PercentToEnergy(
             batteryAIsCharging ? batteryBLowPercent : batteryALowPercent);
