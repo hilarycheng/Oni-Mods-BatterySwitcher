@@ -74,8 +74,12 @@ namespace BatterySwitcher
         public override void DoPostConfigureComplete(GameObject go)
         {
             Building.DoPostConfigureComplete(go);
+            EnergyConsumer consumer = go.GetComponent<EnergyConsumer>();
+            if (consumer == null)
+                return;
+
             UnityEngine.Object.DestroyImmediate(go.GetComponent<EnergyGenerator>());
-            go.GetComponent<EnergyConsumer>().BaseWattageRating = 0f;
+            consumer.BaseWattageRating = 0f;
             Battery input = go.AddOrGet<Battery>();
             input.capacity = InputWattage;
             input.chargeWattage = InputWattage;

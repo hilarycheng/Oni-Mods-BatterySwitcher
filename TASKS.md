@@ -7,7 +7,7 @@ Run `dotnet build` after every code change.
 
 - [x] `netstandard2.1` project and `KMod.UserMod2` entry point exist.
 - [x] Baseline build succeeds against the installed ONI assemblies.
-- [ ] Investigate the current `System.IO.Compression` and `System.Net.Http`
+- [x] Investigate the current `System.IO.Compression` and `System.Net.Http`
       assembly-version warnings; suppress them only if confirmed harmless.
 - [x] Check `mod.yaml` and `mod_info.yaml` into the repository. They currently
       exist only in the local mod directory.
@@ -194,11 +194,11 @@ bytes.
 
 ### Pre-release corrections
 
-- [ ] Make the missing-power-API fallback leave the building inert without
+- [x] Make the missing-power-API fallback leave the building inert without
       dereferencing an absent `EnergyConsumer`.
-- [ ] Investigate the `System.Net.Http` and `System.IO.Compression` build
+- [x] Investigate the `System.Net.Http` and `System.IO.Compression` build
       warnings. Suppress them only after confirming they are harmless.
-- [ ] Replace deprecated `supportedContent` metadata with the current minimal
+- [x] Replace deprecated `supportedContent` metadata with the current minimal
       unrestricted `mod_info.yaml`, using the build actually tested:
 
   ```yaml
@@ -212,7 +212,7 @@ bytes.
   is introduced.
 - [ ] Keep the project, `mod_info.yaml`, Workshop listing, and release tag on
       the same version.
-- [ ] Preserve the MIT notices for Battery Switcher and the merged PLib,
+- [x] Preserve the MIT notices for Battery Switcher and the merged PLib,
       including `Copyright 2025 Peter Han`, in the release package.
 
 Current metadata guidance:
@@ -221,7 +221,7 @@ https://forums.kleientertainment.com/forums/topic/158363-setting-up-mod_infoyaml
 ### Build and package
 
 - [ ] Run `dotnet build -c Release` against the final checked-in source.
-- [ ] Assemble a fresh upload directory containing only:
+- [x] Assemble a fresh upload directory containing only:
 
   ```text
   BatterySwitcher.dll
@@ -234,19 +234,24 @@ https://forums.kleientertainment.com/forums/topic/158363-setting-up-mod_infoyaml
   anim/assets/batteryswitcher/batteryswitcher_build.bytes
   ```
 
-- [ ] Use a square, legible `preview.png`, preferably an in-game screenshot,
+- [x] Use a square, legible `preview.png`, preferably an in-game screenshot,
       and keep it under 1 MB.
-- [ ] Confirm the package contains no `PDB`, `.deps.json`, source art, `bin/`,
+- [x] Confirm the package contains no `PDB`, `.deps.json`, source art, `bin/`,
       `obj/`, decompiler files, development assemblies, Harmony, ONI, Unity,
       PLib, or .NET runtime DLLs.
-- [ ] Confirm PLib is merged into `BatterySwitcher.dll` and the only shipped
+- [x] Confirm PLib is merged into `BatterySwitcher.dll` and the only shipped
       DLL is `BatterySwitcher.dll`.
 - [ ] Record the final DLL/package hash. Deploy and test these exact bytes;
       do not substitute a later rebuild without repeating the release gate.
 
+Current release candidate hashes:
+
+- DLL SHA-256: `151a2442ee385a3ef4ba25abbbe2a317ad1ab6474629c0fd695846bd8290072d`
+- ZIP SHA-256: `ceb2156efb6f7e90fee66b37b84f44417360f9695f786944e040e4f0e7193889`
+
 ### Local release test
 
-- [ ] Install only the clean package in the local mod directory.
+- [x] Install only the clean package in the local mod directory.
 - [ ] Disable unrelated mods and run the complete manual test list from
       `AGENTS.md` on the release build.
 - [ ] Test both unrestricted content configurations claimed by the metadata,
