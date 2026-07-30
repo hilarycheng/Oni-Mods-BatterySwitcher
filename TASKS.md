@@ -220,12 +220,12 @@ Then implement:
 
 ### Gate
 
-- [ ] Each threshold can be changed independently while running or paused.
-- [ ] Existing saves load with 30%/80% defaults; new values survive save/load.
-- [ ] Boundary edits, both-empty, both-full, insufficient input, excess demand,
+- [x] Each threshold can be changed independently while running or paused.
+- [x] Existing saves load with 30%/80% defaults; new values survive save/load.
+- [x] Boundary edits, both-empty, both-full, insufficient input, excess demand,
       pause/resume, all speeds, and rapid speed changes preserve valid roles and
       energy bounds.
-- [ ] No repeated BatterySwitcher exceptions appear in `Player.log`.
+- [x] No repeated BatterySwitcher exceptions appear in `Player.log`.
 
 ## Phase 9 — release packaging
 
@@ -257,7 +257,11 @@ https://forums.kleientertainment.com/forums/topic/158363-setting-up-mod_infoyaml
 
 ### Build and package
 
-- [ ] Run `dotnet build -c Release` against the final checked-in source.
+- [ ] Run `dotnet build -c Release` against the final checked-in source. Stop
+      and resolve any error before packaging; report relevant warnings only.
+- [ ] Confirm `bin/Release/netstandard2.1/BatterySwitcher.dll` has the expected
+      release timestamp and that the Release merge removed the standalone
+      `PLib.dll`.
 - [x] Assemble a fresh upload directory containing only:
 
   ```text
@@ -281,6 +285,16 @@ https://forums.kleientertainment.com/forums/topic/158363-setting-up-mod_infoyaml
 - [ ] Record the final DLL/package hash. Deploy and test these exact bytes;
       do not substitute a later rebuild without repeating the release gate.
 
+#### Exact-byte release procedure
+
+- [ ] Create the clean upload directory from the completed Release build and
+      package it as a ZIP without adding a parent directory to the archive.
+- [ ] Record SHA-256 hashes for the runtime DLL and the ZIP in this file,
+      replacing the provisional values below.
+- [ ] Copy that exact clean package to the local mod directory. If the DLL or
+      package is rebuilt after this point, recreate the package, hashes, and
+      all release-gate tests.
+
 Current locally tested DLL:
 
 - DLL SHA-256: `74bdfded502133b50a2c0fc1aa2fa5ab6737cbacbb18302c2920b27cd5b12c62`
@@ -289,30 +303,34 @@ Current locally tested DLL:
 ### Local release test
 
 - [x] Install only the clean package in the local mod directory.
-- [ ] Disable unrelated mods and run the complete manual test list from
-      `AGENTS.md` on the release build.
-- [ ] Test both unrestricted content configurations claimed by the metadata,
-      at minimum base-game and Spaced Out content modes.
-- [ ] Pass a new-game test and load a save created by an earlier tested build
-      with Battery Switcher present.
-- [ ] Recheck construction, selection, deconstruction, save/load, isolated
-      circuits, every buffer boundary, pause/resume, all speeds, rapid speed
-      changes, insufficient input, and excess demand.
-- [ ] Exit normally and confirm `Player.log` contains no repeated
-      BatterySwitcher exception or error.
+- [ ] Disable unrelated mods so Battery Switcher is the only enabled local mod.
+- [ ] In base-game content, start a new game and verify construction,
+      selection, deconstruction, save/load, and independently wired input and
+      output circuits.
+- [ ] In base-game content, test both empty, one full, both full, insufficient
+      input, excess output demand, every threshold boundary, pause/resume,
+      every game speed, and rapid speed changes.
+- [ ] In base-game content, change all four thresholds while running and
+      paused; save and load to confirm new values persist. Load an earlier
+      tested save to confirm absent threshold fields default to 30%/80%.
+- [ ] Repeat the new-game and earlier-save smoke tests in Spaced Out content.
+- [ ] Exit normally after each content-mode test and confirm `Player.log`
+      contains no repeated BatterySwitcher exception or error.
 
 ### Workshop dry run
 
 - [ ] Install **Oxygen Not Included Uploader** from Steam Library → Tools.
 - [ ] Prepare the Workshop title, description, change note, appropriate tags,
-      tested game build, feature summary, and source-repository link.
+      tested game build, feature summary, source-repository link, and preview.
 - [ ] Upload with hidden visibility first and accept the Steam Workshop legal
       agreement before making the item public.
 - [ ] Subscribe to the hidden Workshop item, then remove or disable the local
       copy so two mods with `hilary.BatterySwitcher` cannot mask each other.
 - [ ] Confirm Steam downloads the expected version and exact runtime files.
-- [ ] Repeat the new-game and archived-save smoke tests using only the
-      Workshop-downloaded copy.
+- [ ] Verify the Workshop-downloaded DLL and package hashes match the recorded
+      release hashes, where Steam's installed layout permits direct comparison.
+- [ ] Repeat the base-game and Spaced Out new-game and archived-save smoke
+      tests using only the Workshop-downloaded copy.
 - [ ] Check the Workshop page, preview, description, tags, visibility, and
       subscriber installation before publishing publicly.
 
@@ -322,13 +340,17 @@ https://partner.steamgames.com/doc/features/workshop/implementation
 ### Archived versions and publication
 
 - [ ] Perform one local `archived_versions` selection test using a copy of the
-      clean package and its own `mod_info.yaml`.
+      clean package and its own `mod_info.yaml`; confirm ONI chooses the
+      intended package for the simulated build condition.
 - [ ] Do not ship a redundant archived copy in the first `0.1.0` release.
       Add an archive only before a later incompatible game-build, DLC, or
       public-testing update.
 - [ ] Make the Workshop item public only after the subscribed-copy test passes.
-- [ ] Commit any final metadata or documentation changes with a Conventional
-      Commit, tag that commit `v0.1.0`, and record the Workshop URL.
+- [ ] Confirm `<Version>` in `BatterySwitcher.csproj`, `version` in
+      `mod_info.yaml`, the Workshop listing, and the intended Git tag all read
+      `0.1.0` before release.
+- [ ] Commit final metadata or documentation changes with a Conventional
+      Commit, tag that commit `v0.1.0`, and record the Workshop URL below.
 
 ### Gate
 
