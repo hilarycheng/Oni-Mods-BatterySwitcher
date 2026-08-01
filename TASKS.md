@@ -283,7 +283,7 @@ https://forums.kleientertainment.com/forums/topic/158363-setting-up-mod_infoyaml
 - [x] Confirm PLib is merged into `BatterySwitcher.dll` and the only shipped
       DLL is `BatterySwitcher.dll`.
 - [x] Record the final DLL/package hash.
-- [ ] Deploy and test these exact bytes;
+- [x] Deploy and test these exact bytes;
       do not substitute a later rebuild without repeating the release gate.
 
 #### Exact-byte release procedure
@@ -298,24 +298,24 @@ https://forums.kleientertainment.com/forums/topic/158363-setting-up-mod_infoyaml
 
 Current locally tested DLL:
 
-- DLL SHA-256: `0abb0dca786021e83ccadc166f6976104d92e833c0aec6d9491914d0cf4fb884`
-- ZIP SHA-256: `f6e52c246117ab7bf3be83063ff23b22189e67e424d8b73d0c69fcb4b32999a1`
+- DLL SHA-256: `eebbeac5b197e1ecae7023c825915314f45c959bc8186c87777080a901b3fff6`
+- ZIP SHA-256: `1776ff266d7dffd243b530f33527671cae4454ebbcc7e3444007d8ab84390599`
 
 ### Local release test
 
 - [x] Install only the clean package in the local mod directory.
-- [ ] Disable unrelated mods so Battery Switcher is the only enabled local mod.
-- [ ] In base-game content, start a new game and verify construction,
+- [x] Disable unrelated mods so Battery Switcher is the only enabled local mod.
+- [x] In base-game content, start a new game and verify construction,
       selection, deconstruction, save/load, and independently wired input and
       output circuits.
-- [ ] In base-game content, test both empty, one full, both full, insufficient
+- [x] In base-game content, test both empty, one full, both full, insufficient
       input, excess output demand, every threshold boundary, pause/resume,
       every game speed, and rapid speed changes.
-- [ ] In base-game content, change all four thresholds while running and
+- [x] In base-game content, change all four thresholds while running and
       paused; save and load to confirm new values persist. Load an earlier
       tested save to confirm absent threshold fields default to 30%/80%.
-- [ ] Repeat the new-game and earlier-save smoke tests in Spaced Out content.
-- [ ] Exit normally after each content-mode test and confirm `Player.log`
+- [x] Repeat the new-game and earlier-save smoke tests in Spaced Out content.
+- [x] Exit normally after each content-mode test and confirm `Player.log`
       contains no repeated BatterySwitcher exception or error.
 
 ### Workshop dry run
