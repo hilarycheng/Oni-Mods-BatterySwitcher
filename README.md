@@ -1,19 +1,31 @@
 # Battery Switcher
 
-Battery Switcher is an *Oxygen Not Included* mod that adds a standalone power
-building with two isolated internal batteries.
+Battery Switcher is an *Oxygen Not Included* mod that adds a standalone 3×2
+power building with two isolated internal 20 kJ batteries.
 
-One 20 kJ buffer charges from an isolated 1 kW input while the other supplies
-an isolated output circuit. Charging stops at 80% and discharging stops at 30%
-by default; each buffer's thresholds can be changed in its side screen. The
-buffers exchange roles when both thresholds are reached. Output is
-limited by usable stored energy and ONI's normal wire rules, not an artificial
-building wattage cap. The input wire reports its 1 kW charging load through
-ONI's native circuit accounting. The 3×2 building costs 400 kg of refined
-metal and generates 1.05 kDTU/s while supplying output power.
+One battery charges from the input circuit while the other supplies a separate
+output circuit. Charging stops at 80% and discharging stops at 30% by default;
+each battery's thresholds can be changed in its side screen. The buffers
+exchange roles when both thresholds are reached. Output is limited by usable
+stored energy and ONI's normal wire rules, not an artificial building wattage
+cap. The building costs 400 kg of refined metal and generates 1.05 kDTU/s
+while supplying output power.
 
 When an output draw reaches a supplier's low threshold, the remaining draw
 continues from the newly supplying buffer in the same simulation step.
+
+## Inspiration and source
+
+Battery Switcher is inspired by Saturnus' classic switched-battery concept:
+
+> "switch which battery is connected to the generator, and which is connected
+> to the consumers."
+
+The original discussion explains the alternating two-battery design, which
+keeps the generator and consumer circuits isolated:
+[Serial Smart Battery Automation](https://forums.kleientertainment.com/forums/topic/87604-serial-smart-battery-automation/#findComment-1004188).
+
+Source code: [hilarycheng/Oni-Mods-BatterySwitcher](https://github.com/hilarycheng/Oni-Mods-BatterySwitcher).
 
 ## Graphics
 
