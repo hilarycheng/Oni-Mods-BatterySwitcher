@@ -12,6 +12,9 @@ building wattage cap. The input wire reports its 1 kW charging load through
 ONI's native circuit accounting. The 3×2 building costs 400 kg of refined
 metal and generates 1.05 kDTU/s while supplying output power.
 
+When an output draw reaches a supplier's low threshold, the remaining draw
+continues from the newly supplying buffer in the same simulation step.
+
 ## Graphics
 
 The custom KAnim keeps the frozen 3×2 footprint. Its in-world art is 290×215

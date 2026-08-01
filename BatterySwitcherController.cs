@@ -84,31 +84,36 @@ namespace BatterySwitcher
                 ChargingEnergy < ChargingHighEnergy
                     ? BatterySwitcherConfig.InputWattage
                     : 0f;
-            float outputAvailable = Mathf.Max(
-                0f,
-                SupplyingEnergy - SupplyingLowEnergy);
-            AssignJoulesAvailable(outputAvailable);
+            RefreshOutputLedger();
         }
 
         public override void ApplyDeltaJoules(float joules, bool doDisease)
         {
             if (joules < 0f)
             {
-                float transferred = Mathf.Min(
-                    -joules,
-                    Mathf.Max(
-                        0f,
-                        SupplyingEnergy - SupplyingLowEnergy));
-                if (transferred > 0f)
+                float remaining = -joules;
+                for (int buffer = 0; buffer < 2 && remaining > 0f; buffer++)
                 {
-                    SupplyingEnergy = ClampEnergy(SupplyingEnergy - transferred);
-                    outputEnergyTransferred = true;
+                    float usable = Mathf.Max(
+                        0f,
+                        SupplyingEnergy - SupplyingLowEnergy);
+                    float transferred = Mathf.Min(remaining, usable);
+                    if (transferred > 0f)
+                    {
+                        SupplyingEnergy = remaining >= usable
+                            ? SupplyingLowEnergy
+                            : ClampEnergy(SupplyingEnergy - transferred);
+                        remaining -= transferred;
+                        outputEnergyTransferred = true;
+                    }
+
+                    bool previousRole = batteryAIsCharging;
+                    SwitchAtBoundary();
+                    if (batteryAIsCharging == previousRole)
+                        break;
                 }
             }
-            AssignJoulesAvailable(Mathf.Clamp(
-                JoulesAvailable + joules,
-                0f,
-                doDisease ? float.MaxValue : Capacity));
+            RefreshOutputLedger();
         }
 
         public void SimEveryTick(float _)
@@ -143,6 +148,9 @@ namespace BatterySwitcher
         private float ChargingHighEnergy => PercentToEnergy(
             batteryAIsCharging ? batteryAHighPercent : batteryBHighPercent);
 
+        private float ChargingLowEnergy => PercentToEnergy(
+            batteryAIsCharging ? batteryALowPercent : batteryBLowPercent);
+
         private float SupplyingLowEnergy => PercentToEnergy(
             batteryAIsCharging ? batteryBLowPercent : batteryALowPercent);
 
@@ -151,6 +159,18 @@ namespace BatterySwitcher
             if (ChargingEnergy >= ChargingHighEnergy &&
                 SupplyingEnergy <= SupplyingLowEnergy)
                 batteryAIsCharging = !batteryAIsCharging;
+        }
+
+        private void RefreshOutputLedger()
+        {
+            float transferable = Mathf.Max(
+                0f,
+                SupplyingEnergy - SupplyingLowEnergy);
+            if (ChargingEnergy >= ChargingHighEnergy)
+                transferable += Mathf.Max(
+                    0f,
+                    ChargingEnergy - ChargingLowEnergy);
+            AssignJoulesAvailable(transferable);
         }
 
         private static string ResolveBufferStatus(string _, object data)

@@ -257,9 +257,9 @@ https://forums.kleientertainment.com/forums/topic/158363-setting-up-mod_infoyaml
 
 ### Build and package
 
-- [ ] Run `dotnet build -c Release` against the final checked-in source. Stop
+- [x] Run `dotnet build -c Release` against the final checked-in source. Stop
       and resolve any error before packaging; report relevant warnings only.
-- [ ] Confirm `bin/Release/netstandard2.1/BatterySwitcher.dll` has the expected
+- [x] Confirm `bin/Release/netstandard2.1/BatterySwitcher.dll` has the expected
       release timestamp and that the Release merge removed the standalone
       `PLib.dll`.
 - [x] Assemble a fresh upload directory containing only:
@@ -282,23 +282,24 @@ https://forums.kleientertainment.com/forums/topic/158363-setting-up-mod_infoyaml
       PLib, or .NET runtime DLLs.
 - [x] Confirm PLib is merged into `BatterySwitcher.dll` and the only shipped
       DLL is `BatterySwitcher.dll`.
-- [ ] Record the final DLL/package hash. Deploy and test these exact bytes;
+- [x] Record the final DLL/package hash.
+- [ ] Deploy and test these exact bytes;
       do not substitute a later rebuild without repeating the release gate.
 
 #### Exact-byte release procedure
 
-- [ ] Create the clean upload directory from the completed Release build and
+- [x] Create the clean upload directory from the completed Release build and
       package it as a ZIP without adding a parent directory to the archive.
-- [ ] Record SHA-256 hashes for the runtime DLL and the ZIP in this file,
+- [x] Record SHA-256 hashes for the runtime DLL and the ZIP in this file,
       replacing the provisional values below.
-- [ ] Copy that exact clean package to the local mod directory. If the DLL or
+- [x] Copy that exact clean package to the local mod directory. If the DLL or
       package is rebuilt after this point, recreate the package, hashes, and
       all release-gate tests.
 
 Current locally tested DLL:
 
-- DLL SHA-256: `74bdfded502133b50a2c0fc1aa2fa5ab6737cbacbb18302c2920b27cd5b12c62`
-- ZIP SHA-256: pending final package rebuild.
+- DLL SHA-256: `0abb0dca786021e83ccadc166f6976104d92e833c0aec6d9491914d0cf4fb884`
+- ZIP SHA-256: `f6e52c246117ab7bf3be83063ff23b22189e67e424d8b73d0c69fcb4b32999a1`
 
 ### Local release test
 
